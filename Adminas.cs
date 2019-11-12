@@ -8,6 +8,11 @@ namespace RenginiuBilietai2
 {
     class Adminas : Prisijungimas
     {
+        public override string LoginTable {
+            get { 
+                return "adminai"; 
+            }
 
+        } 
     }
 }

@@ -8,24 +8,31 @@ using System.Threading.Tasks;
 
 namespace RenginiuBilietai2
 {
-    class Prisijungimas
+    abstract class Prisijungimas
     { 
         private int PrisijungimoID;
         private string VartotojoVardas;
         private string Slaptazodis;
         private bool Ijungtas;
+        abstract public string LoginTable { get; }
 
-        MySqlConnection con = new MySqlConnection("server = localhost; user id = root; password=Lego3356; database=newdatabase");
+
+
+       
         
 
         public bool Login(string username, string password)
         {
-           int i = 0;
+
+            MySqlConnection con = new MySqlConnection("server = localhost; user id = root; password=Lego3356; database=newdatabase");
+
+            int i = 0;
             con.Open();
+           
 
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from logininfo where user='" + username + "' and password='" + password + "'";
+            cmd.CommandText = "select * from " + LoginTable + " where user='" + username + "' and password='" + password + "'";
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
